@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kigali Kickstart Coffee - Official Site</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Custom branding colors based on coffee and Rwandan tones
+                        'coffee-dark': '#4A2C2A', // Dark brown/espresso
+                        'coffee-medium': '#8B4513', // Medium brown/brew
+                        'coffee-light': '#D2B48C', // Light tan/crema
+                        'coffee-accent': '#E57373', // Rwandan red accent
+                        'kigali-blue': '#4299E1', // Vibrant blue for contrast
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Custom styles for the background slideshow */
+        .slideshow-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        .slide-item {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Use cover to ensure it fills the space without distortion */
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+        .slide-active {
+            opacity: 1;
+        }
+        .text-shadow-custom {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+        }
+        /* SCROLL FIX REMOVED: Now using JavaScript to hide/show sections */
+    </style>
+
+    <!-- Moment.js for dynamic date/time calculations (Shop Status Feature) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+</head>
+<body class="bg-white font-sans text-coffee-dark">
+
+    <!-- Header & Navigation -->
+    <header class="bg-coffee-dark text-white shadow-lg sticky top-0 z-20">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <a href="#home" class="nav-link text-3xl font-extrabold tracking-wider rounded-md p-1 hover:text-coffee-accent transition duration-300 flex items-center space-x-2">
+                    <span class="text-coffee-accent">☕️</span>
+                    <span>Kigali Kickstart</span>
+                </a>
+                
+                <!-- Navigation Links -->
+                <div class="flex space-x-4">
+                    <a href="#home" class="nav-link text-coffee-light hover:text-coffee-accent px-3 py-2 text-sm font-medium rounded-lg transition duration-300">Home</a>
+                    <a href="#about" class="nav-link text-coffee-light hover:text-coffee-accent px-3 py-2 text-sm font-medium rounded-lg transition duration-300">Our Story</a>
+                    <a href="#menu" class="nav-link text-coffee-light hover:text-coffee-accent px-3 py-2 text-sm font-medium rounded-lg transition duration-300">Menu</a>
+                    <a href="#contact" class="nav-link bg-coffee-accent text-coffee-dark hover:bg-red-300 px-3 py-2 text-sm font-semibold rounded-lg shadow-md transition duration-300">Order Now</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section (Home Page) -->
+        <!-- All sections now have the 'content-section' class for easy targeting -->
+        <section id="home" class="content-section relative py-32 md:py-48 flex items-center justify-center text-center overflow-hidden min-h-[50vh]">
+
+            <!-- Slideshow Background (JS Feature 1) -->
+            <div id="slideshow-bg" class="slideshow-bg">
+                <!-- Placeholder image URLs for a dynamic, working slideshow -->
+                <img src="Screenshot 2025-11-11 204502.png" class="slide-item slide-active" alt="Kigali city view">
+                <img src="Screenshot 2025-11-11 204147.png" class="slide-item" alt="Coffee farm in Rwanda">
+                <img src="Screenshot 2025-11-11 202625.png" class="slide-item" alt="Freshly roasted coffee beans">
+            </div>
+            <!-- Dark Overlay -->
+            <div class="slideshow-bg bg-black opacity-40 z-10"></div>
+
+            <!-- Hero Content -->
+            <div class="p-6 bg-black bg-opacity-40 rounded-xl max-w-3xl mx-auto shadow-2xl z-20 border-2 border-coffee-light">
+                <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-4 text-shadow-custom">
+                    Kigali's Finest Brew, Every Morning.
+                </h1>
+                <p class="text-xl md:text-2xl text-coffee-light mb-8 font-light text-shadow-custom">
+                    Sustainably sourced, perfectly roasted, and hand-crafted with the spirit of Rwanda.
+                </p>
+                <!-- This internal link will also use the new SPA logic -->
+                <a href="#menu" class="nav-link inline-block bg-kigali-blue text-white font-bold text-lg px-8 py-3 rounded-full hover:bg-blue-600 transition duration-300 transform hover:scale-105 shadow-xl">
+                    Discover Our Coffee
+                </a>
+                
+                <!-- Shop Status (JS Feature 2: Dynamic Content) -->
+                <div id="shop-status" class="mt-4 text-lg font-semibold text-white">
+                    <!-- Status will be inserted here by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section (Our Story) -->
+        <section id="about" class="content-section py-16 md:py-24 bg-coffee-light/20 hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    
+                    <div class="lg:pr-10 order-2 lg:order-1">
+                        <h2 class="text-4xl font-bold text-coffee-dark mb-4 border-b-4 border-coffee-accent pb-2 inline-block">
+                            Our Story: From Hills to Hand
+                        </h2>
+                        <p class="text-lg text-coffee-dark leading-relaxed mb-6">
+                            Kigali Kickstart Coffee was born from a passion for the rich, complex flavors found in Rwandan highlands. We partner directly with small-holder farmers, ensuring fair wages and sustainable practices that protect the land and empower local communities.
+                        </p>
+                        <p class="text-lg text-coffee-dark leading-relaxed mb-6">
+                            Our beans are hand-picked, wet-processed to perfection, and roasted locally in Kigali to bring out the distinct notes of citrus, black tea, and brown sugar unique to this region. It's more than coffee—it's a commitment to excellence and community.
+                        </p>
+                        <ul class="list-disc list-inside text-coffee-medium font-semibold">
+                            <li>Direct Trade & Fair Pricing</li>
+                            <li>Wet-Processed Arabica Beans</li>
+                            <li>Locally Roasted in Rwanda</li>
+                        </ul>
+                    </div>
+
+                    <!-- Placeholder for the video/media content (HTML media element requirement) -->
+                    <div class="rounded-xl overflow-hidden shadow-2xl transform hover:scale-[1.02] transition duration-500 relative order-1 lg:order-2">
+                        <video controls loop muted poster="Cafe Style Coffe at Home  Coffe Dates at home - Mathu Soundar (1080p, h264).mp4"
+                               class="w-full h-full object-cover min-h-[400px]">
+                            <!-- NOTE: Replace 'your-story-video.mp4' with the actual path to your video file! -->
+                            <source src="Cafe Style Coffe at Home  Coffe Dates at home - Mathu Soundar (1080p, h264).mp4" type="video/mp4">
+                            <p>Your browser does not support the video tag. Please update your browser.</p>
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products/Services Section (Menu) -->
+        <section id="menu" class="content-section py-16 md:py-24 bg-white hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-4xl font-bold text-coffee-dark mb-12">
+                    Our Signature Brews
+                </h2>
+                
+                <!-- Menu Grid (CSS: Grid/Cards) -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                    <!-- Product Card 1 -->
+                    <article class="bg-coffee-light p-6 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 transform hover:-translate-y-1 border-b-4 border-coffee-medium">
+                        <h3 class="text-2xl font-bold text-coffee-dark mb-2">Mountain Sunrise</h3>
+                        <p class="text-sm text-coffee-medium mb-4">Light Roast | $18.50 / 250g</p>
+                        <p class="text-coffee-dark mb-6 text-base">Bright, citrusy, and floral with a clean finish. Sourced from the highest-altitude farms. Perfect for pour-overs.</p>
+                        <div class="text-3xl mb-4 text-coffee-accent">🍋</div>
+                        <button class="bg-coffee-dark text-white px-6 py-2 rounded-full font-semibold hover:bg-coffee-medium transition duration-300 shadow-md">Add to Cart</button>
+                    </article>
+
+                    <!-- Product Card 2 (Featured) -->
+                    <article class="bg-coffee-dark text-white p-6 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 transform hover:-translate-y-1 border-4 border-coffee-accent">
+                        <h3 class="text-2xl font-bold mb-2">The Kickstart Blend</h3>
+                        <p class="text-sm text-coffee-light mb-4">Medium Roast | $16.00 / 250g</p>
+                        <p class="text-coffee-light mb-6 text-base">Rich chocolate and caramel notes. A robust, balanced foundation for espresso and drip coffee. Our best-seller!</p>
+                        <div class="text-3xl mb-4 text-coffee-accent">✨</div>
+                        <button class="bg-coffee-accent text-coffee-dark px-6 py-2 rounded-full font-semibold hover:bg-red-300 transition duration-300 shadow-lg">Order Blend</button>
+                    </article>
+
+                    <!-- Product Card 3 -->
+                    <article class="bg-coffee-light p-6 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 transform hover:-translate-y-1 border-b-4 border-coffee-medium">
+                        <h3 class="text-2xl font-bold text-coffee-dark mb-2">Evening Serenity</h3>
+                        <p class="text-sm text-coffee-medium mb-4">Decaf Dark Roast | $19.00 / 250g</p>
+                        <p class="text-coffee-dark mb-6 text-base">A smooth, creamy dark roast using the gentle Swiss Water Process. All the flavor, none of the caffeine jitters.</p>
+                        <div class="text-3xl mb-4 text-coffee-accent">🌙</div>
+                        <button class="bg-coffee-dark text-white px-6 py-2 rounded-full font-semibold hover:bg-coffee-medium transition duration-300 shadow-md">Add to Cart</button>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section (Form & Details) -->
+        <section id="contact" class="content-section py-16 md:py-24 bg-kigali-blue/90 text-center hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+                    Ready for your Kickstart?
+                </h2>
+                <p class="text-lg text-white/90 mb-8">
+                    Sign up below to receive a 10% discount on your first online order!
+                </p>
+
+                <!-- Subscription Form (HTML Forms & JS Feature 3: Confirmation) -->
+                <form onsubmit="handleSubscription(event);" class="max-w-lg mx-auto bg-white p-6 rounded-xl shadow-2xl">
+                    <input type="email" id="subscriber-email" placeholder="Enter your email" required
+                           class="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:ring-coffee-accent focus:border-coffee-accent transition duration-300">
+                    <button type="submit" class="w-full bg-coffee-accent text-coffee-dark font-bold py-3 rounded-lg hover:bg-red-300 transition duration-300 transform hover:scale-[1.02]">
+                        Get My Discount
+                    </button>
+                    <!-- Message box instead of alert() -->
+                    <p id="message-box" class="mt-4 text-sm font-semibold text-green-600 hidden">
+                        Thanks for subscribing! Your 10% discount code will be emailed shortly.
+                    </p>
+                </form>
+
+                <!-- Business Contact Details -->
+                <div class="mt-12 text-white">
+                    <h3 class="text-2xl font-semibold mb-3">Visit Our Flagship Store</h3>
+                    <address class="not-italic text-lg">
+                        123 Coffee Lane, Central Business District, Kigali<br>
+                        Phone: <a href="tel:+250788123456" class="hover:underline">+250 788 123 456</a><br>
+                        Email: <a href="mailto:hello@kigalickickstart.rw" class="hover:underline">hello@kigalickstart.rw</a>
+                    </address>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-coffee-dark text-coffee-light py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm">
+            <p>&copy; 2025 Kigali Kickstart Coffee. Brewed with passion in Rwanda.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Slideshow Images (JS Feature 1)
+        const slideImages = [
+            'https://placehold.co/1920x1080/4A2C2A/D2B48C?text=Kigali+Cityscape',
+            'https://placehold.co/1920x1080/8B4513/FFFFFF?text=Rwandan+Coffee+Farm',
+            'https://placehold.co/1920x1080/4A2C2A/D2B48C?text=Freshly+Roasted+Beans'
+        ];
+        
+        let slideIndex = 0;
+        let slides;
+        const intervalTime = 4000;
+
+        /**
+         * Cycles through background images for the hero section.
+         */
+        function startSlideshow() {
+            if (!slides || slides.length === 0) return;
+
+            // Hide all slides
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].classList.remove('slide-active');
+            }
+            
+            // Increment index and loop if needed
+            slideIndex++;
+            if (slideIndex > slides.length) {
+                slideIndex = 1;
+            }
+            
+            // Show the current slide
+            slides[slideIndex - 1].classList.add('slide-active');
+            
+            // Set timeout for the next slide change
+            setTimeout(startSlideshow, intervalTime);
+        }
+
+        /**
+         * Displays a temporary confirmation message after form submission (JS Feature 3).
+         * @param {Event} event - The form submission event.
+         */
+        function handleSubscription(event) {
+            event.preventDefault();
+            const emailInput = document.getElementById('subscriber-email');
+
+            if (emailInput.value.trim() === "" || !emailInput.checkValidity()) {
+                 const msgBox = document.getElementById('message-box');
+                 msgBox.textContent = "Please enter a valid email address.";
+                 msgBox.classList.remove('hidden');
+                 msgBox.classList.remove('text-green-600');
+                 msgBox.classList.add('text-red-600');
+                 setTimeout(() => {
+                    msgBox.classList.add('hidden');
+                 }, 3000);
+                 return;
+            }
+
+            // Simulate form submission success
+            const msgBox = document.getElementById('message-box');
+            msgBox.textContent = "Thanks for subscribing! Your 10% discount code will be emailed shortly.";
+            msgBox.classList.remove('hidden');
+            msgBox.classList.remove('text-red-600');
+            msgBox.classList.add('text-green-600');
+            emailInput.value = ''; // Clear the input
+
+            setTimeout(() => {
+                msgBox.classList.add('hidden');
+            }, 5000);
+        }
+
+        /**
+         * Calculates and displays the shop's open/closed status (JS Feature 2).
+         * Open: Mon-Fri, 7 AM - 6 PM (18:00)
+         */
+        function updateShopStatus() {
+            const now = moment();
+            const dayOfWeek = now.day(); // 0 (Sunday) to 6 (Saturday)
+            const hour = now.hour();
+
+            // Check if it's Monday (1) through Friday (5)
+            const isWeekday = dayOfWeek >= 1 && dayOfWeek <= 5;
+
+            // Check if the time is between 7 AM and 6 PM (exclusive of 6 PM)
+            const isOpenTime = hour >= 7 && hour < 18;
+
+            const shopStatusElement = document.getElementById('shop-status');
+            let statusText = '';
+            let statusClass = '';
+
+            if (isWeekday && isOpenTime) {
+                statusText = 'We are OPEN! Come visit us until 6 PM.';
+                statusClass = 'bg-green-600/90';
+            } else {
+                statusText = 'Currently CLOSED. Visit us Mon-Fri, 7 AM - 6 PM.';
+                statusClass = 'bg-red-600/90';
+            }
+
+            shopStatusElement.innerHTML = `
+                <span class="inline-block px-3 py-1 rounded-full shadow-lg ${statusClass} text-white text-sm md:text-base">
+                    ${statusText}
+                </span>
+            `;
+        }
+        
+        /**
+         * Shows the selected content section and hides all others.
+         * Also updates the URL hash.
+         * @param {string} sectionId - The ID of the section to show (e.g., 'home', 'about').
+         */
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                // Show only the requested section
+                if (section.id === sectionId) {
+                    section.classList.remove('hidden');
+                } else {
+                    section.classList.add('hidden');
+                }
+            });
+
+            // Manually update the URL hash
+            window.history.pushState(null, null, '#' + sectionId);
+        }
+
+
+        // Initialization on window load
+        window.onload = function() {
+            // 1. Initialize slideshow
+            slides = document.getElementsByClassName('slide-item');
+            if (slides.length > 0) {
+                slides[0].classList.add('slide-active');
+                slideIndex = 0;
+                setTimeout(startSlideshow, intervalTime);
+            }
+
+            // 2. Initialize and continually update shop status
+            updateShopStatus();
+            setInterval(updateShopStatus, 60000); // Update every minute
+            
+            // 3. Setup SPA Navigation (show/hide sections)
+            const navLinks = document.querySelectorAll('.nav-link'); 
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault(); // Stop default anchor scrolling
+                    const targetId = this.getAttribute('href').substring(1); // Get the section ID (e.g., 'home')
+                    showSection(targetId);
+                });
+            });
+
+            // 4. Initial Section Display based on URL hash or default to 'home'
+            let initialSectionId = window.location.hash ? window.location.hash.substring(1) : 'home';
+            
+            // Validate section ID
+            if (!document.getElementById(initialSectionId) || initialSectionId === "") {
+                initialSectionId = 'home';
+            }
+            showSection(initialSectionId);
+        };
+    </script>
+</body>
+</html>
